@@ -1,0 +1,68 @@
+
+
+Type casting
+    - explicite casting - x: int = 5; float(x) - Forces the data conversion
+
+    - implicite casting
+        Python silently converts the datatype - widening opration on integer and put it into floating point number
+
+Arithmatic operations
+    +
+    -
+    *
+    /
+    //
+    %
+
+Logical operations
+    && conjenction
+    || disjunction
+    ^ Xor
+    ! negation
+
+
+Comparisions
+    < strictl less than
+    <= less than or equal
+    == equal
+    != not equal
+    >= greater then or equal
+    > strictly greater then
+
+Control flow
+
+    IF-ELSE
+        condition: boolean =  True
+
+        if condition:
+            print("True")
+        else:
+            print("False")
+
+    IF-ELIF
+        if ans == "xxx":
+            print("bbb")
+        elif ans == "yyy":
+            print("aaa")
+        else:
+            print("cccc")
+
+    LOOPS
+        x: int = 0
+        while x <= 100:
+            if x % 2 == 0:
+                print(x)
+            x = x + 1
+
+        for x in range(101):
+            if x % 2 == 0
+                print(x)
+
+        for x in range(lower, upper, steps)
+
+
+
+
+    
+
+
