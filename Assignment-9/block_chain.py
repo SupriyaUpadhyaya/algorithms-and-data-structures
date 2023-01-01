@@ -1,5 +1,6 @@
 from dataclasses import dataclass
 import hashlib
+import random
 
 
 def bytes_to_bits(arr: bytes,) -> str:
@@ -21,26 +22,44 @@ class Block:
         self.proofOfWork = 0
 
     def hash(self) -> bytes:
-        return NotImplementedError()  # TODO
+        hashing = hashlib.sha256()
+        hashing.update(self.__str__().encode('utf-8'))
+        return hashing.digest()
 
     def __str__(self) -> str:
-        return NotImplementedError()  # TODO
+        output = self.message + " " + self.previousHashCode.decode('utf-8') + " " + str(self.proofOfWork)
+        return output
 
 
 def number_of_leading_zeros(block: Block) -> int:
-    return NotImplementedError()  # TODO
+    output = len(str(bytes_to_bits(block.hash())).rsplit("1")[0])
+    return output
 
 
 def verify(block: Block, x: int) -> bool:
-    return NotImplementedError()  # TODO
+    if number_of_leading_zeros(block) == x:
+        output = True
+    else:
+        output = False
+    return output
 
 
 def proof_of_work(block: Block, x: int) -> None:
-    return NotImplementedError()  # TODO
+    while block.proofOfWork == 0:
+        block.proofOfWork = random.randint(1, 100000)
+        print(block)
+        zeros = number_of_leading_zeros(block)
+        if zeros != x:
+            block.proofOfWork = 0
+        print(block)
+    return None
 
 
 if __name__ == "__main__":
     block = Block("Message", b'test')
+    print(block)
+    block.hash()
+    number_of_leading_zeros(block)
     print(block, verify(block, 16))
     proof_of_work(block, 16)
     print(block, verify(block, 16))
