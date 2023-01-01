@@ -6,6 +6,8 @@ T = TypeVar('T')
 class MaxHeap:
     def __init__(self, arr: List[T]) -> None:
         self.contents = arr
+        for i in self.contents:
+            print(i)
         if self.contents is not None:
             self.heapify()
 
@@ -23,7 +25,7 @@ class MaxHeap:
 
     def insert(self, obj: T) -> None:
         self.contents.append(obj)
-        self.float(len(self.contents)-1)
+        self.float(len(self.contents) - 1)
 
     def float(self, n: int) -> None:
         to_shift: T = self.contents[n]
@@ -36,20 +38,30 @@ class MaxHeap:
     def remove(self) -> T:
         to_return: T = self.contents[0]
         self.contents[0] = self.contents[self.__len__() - 1]
-        self.sink(0)
         self.contents = self.contents[:-1]
+        self.sink(0)
         return to_return
 
     def sink(self, n: int) -> None:
-        while 2 * n + 1 <= len(self.contents) - 1:
-            child = 2 * n + 1
-            if child < (len(self.contents) - 1):
-                if self.contents[child] > self.contents[child + 1]:
-                    child = child + 1
-            if self.contents[n] <= self.contents[child]:
-                break
-            self.contents[n], self.contents[child] = self.contents[child], self.contents[n]
-            n = child
+        while n <= len(self.contents) - 1:
+            new = n
+            if (2 * n + 2) <= (len(self.contents) - 1):
+                if self.contents[2 * n + 1] > self.contents[2 * n + 2]:
+                    if self.contents[2 * n + 1] > self.contents[n]:
+                        self.contents[n], self.contents[2 * n + 1] = self.contents[2 * n + 1], self.contents[n]
+                        new = 2 * n + 1
+                else:
+                    if self.contents[2 * n + 2] > self.contents[n]:
+                        self.contents[n], self.contents[2 * n + 2] = self.contents[2 * n + 2], self.contents[n]
+                        new = 2 * n + 2
+            elif (2 * n + 1) <= (len(self.contents) - 1) and (2 * n + 2) >= (len(self.contents) - 1):
+                if self.contents[2 * n + 1] > self.contents[n]:
+                    self.contents[n], self.contents[2 * n + 1] = self.contents[2 * n + 1], self.contents[n]
+                    new = 2 * n + 1
+            if new == n:
+                n = len(self.contents)
+            else:
+                n = new
 
     def heapify(self) -> None:
         last_interval_index = len(self.contents) - 1
@@ -68,12 +80,8 @@ if __name__ == "__main__":
     for i in h.get_heap():
         print(i)
     print("======")
-    a1 = [2, 1, 2]
-    print(f"Creating heap from {a1}")
-    heap = MaxHeap(a1)
-    for i in heap.contents:
+    arr = list("1234")
+    heap = MaxHeap(arr)
+    for i in heap.get_heap():
         print(i)
-    heap.remove()
-    print("========")
-    for i in heap.contents:
-        print(i)
+
