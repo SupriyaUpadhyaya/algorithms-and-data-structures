@@ -31,11 +31,18 @@ class TicketToRide:
             if j != "":
                 self.cities.append(j.split(None, 1)[-1])
             i += 1
-        print(self.cities[3])
+        print(self.cities[0])
 
         with open('connections.data') as connections:
             next(connections)
             connect = connections.read().splitlines()
+        print(connect[1])
+
+        for i in range(len(self.cities)):
+            temp = []
+            for j in range(len(self.cities)):
+                temp.append(0)
+            self.adjacency_matrix.append
 
         for item in connect:
             value = item.split(",")
@@ -43,19 +50,19 @@ class TicketToRide:
             while z < 3:
                 value[z] = value[z].strip()
                 z += 1
-            x = 0
-            temp: List = []
-            for city1 in self.cities:
-                y = 0
-                for city2 in self.cities:
-                    y += 1    
-                    if city2 == value[2] and city1 == value[1]:
-                        print(y)
-                        temp.insert(y, value[0])
-                    else:
-                        temp.insert(y, 0)      
-            x += 1
-            print(temp)
+            temp = []
+
+            y = 0
+            print(value)
+            while y < len(self.cities):
+                x = 0
+                while x < len(self.cities):    
+                    if (self.cities[x] == value[2] and self.cities[y] == value[1]) or (self.cities[y] == value[2] and self.cities[y] == value[1]):
+                        print(str(x) + " " + str(y))
+                        self.adjacency_matrix.i[y][x] = int(value[0])
+                        print(temp)
+                    x += 1
+                y += 1
             self.adjacency_matrix.append(temp)
         #print(self.adjacency_matrix)
 

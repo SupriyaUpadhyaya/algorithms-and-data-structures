@@ -26,23 +26,24 @@ def merge(m: list[int], n: list[int]) -> list[int]:
         if i >= len(m):
             out[x] = n[j]
             j += 1
-            x += 1
+            
         elif j >= len(n):
             out[x] = m[i]
             i += 1
-            x += 1
+            
         elif m[i] <= n[j]:
             out[x] = m[i]
             i += 1
-            x += 1
+            
         else:
             out[x] = n[j]
             j += 1
-            x += 1
+            
     return out
 
 
 if __name__ == "__main__":
     input = [3, 2, 4, 1, 5, 7]
     array1 = merge_sort(input)
+    print(array1)
     assert array1 == [1, 2, 3, 4, 5, 7]
